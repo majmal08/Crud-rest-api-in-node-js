@@ -1,4 +1,5 @@
 const models = require("../database/models/index");
+var image = models.Post;
 var fs = require('fs');
 const multer = require('multer');
 // var path = require('path');
@@ -20,57 +21,13 @@ module.exports = {
 
   insert: function (req, res) {
     
-    var form = new FormData();
-
-    const data = multer({
-      storage: multer.diskStorage({
-        destination: (req, imageUrl, cb) => {
-          cb(null, "../public/images");
-        },
-        filename: (req, imageUrl, cb) => {
-          cb(null, imageUrl.originalname)
-        }
-      })
-    });
-    
     res.status(400).send({
-      data:  req.files.foo
+      user_data: req.fields,
+      user_image:  req.files.imageUrl,
     });
 
 
-    if (!req.fields.title) {
-      res.status(400).send({
-        message: "title can not be empty!",
-      });
-    }
-
-
-
-
-    // upload image using multer
-  //   const storage = multer.diskStorage({
-  //     destination: (req, file, callback) => {
-  //       callback(null, '../public/images')
-  //     },
-  //     filename: (req, imageUrl, callback) => {
-  //       callback(null, Date.now() + path.extname(imageUrl.originalname))
-  //     }
-  //   })
-
-  //   const upload = multer({
-  //     storage: storage,
-  //     limits: { fileSize: '1000000' },
-  //     fileFilter: (req, imageUrl, callback) => {
-  //         const fileTypes = /jpeg|jpg|png|gif/
-  //         const mimeType = fileTypes.test(imageUrl.mimetype)  
-  //         const extname = fileTypes.test(path.extname(imageUrl.originalname))
-  
-  //         if(mimeType && extname) {
-  //             return callback(null, true)
-  //         }
-  //         callback('Give proper files formate to upload')
-  //     }
-  // }).single('image')
+    
 
   
     // const post = {

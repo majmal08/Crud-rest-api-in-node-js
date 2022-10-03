@@ -6,15 +6,14 @@ const web = require('./routes/web.js');
 const bodyParser = require('body-parser');
 const formidable = require('express-formidable');
 var path = require('path');
-var fileUpload = require('express-fileupload');
+
 
 app.use(formidable());
 app.use(express.json());
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUpload());
+app.use(express.static(path.join(__dirname, './public')));
 
 
 app.use('/api', web);

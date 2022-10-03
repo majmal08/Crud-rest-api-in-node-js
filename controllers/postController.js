@@ -23,23 +23,22 @@ module.exports = {
     
     res.status(400).send({
       user_data: req.fields,
-      user_image:  req.files.imageUrl,
+      user_image:  req.files.imageUrl
     });
 
+ 
+      // console.log("upload " + upload);
+   
+    const post = {
+      title: req.fields.title,
+      content: req.fields.content,
+      imageUrl: req.files.imageUrl.name,
+      userId: req.fields.userId,
+    };
 
-    
-
-  
-    // const post = {
-    //   title: req.fields.title,
-    //   content: req.fields.content,
-    //   imageUrl: req.fields.imageUrl,
-    //   userId: req.fields.userId,
-    // };
-
-    // res.status(400).send({
-    //   data: post,
-    // });
+    res.status(400).send({
+      data: post,
+    });
 
     // models.Post.create(post)
     //   .then((data) => {
